@@ -56,10 +56,14 @@ jobs:
 
     # Étape 4 : Exécuter l'analyse SonarQube
     - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@main
+      with:
+        projectBaseDir: .
+        args: >
+          -Dsonar.projectKey=simpleProject
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn sonar:sonar \
-          -Dsonar.projectKey=simpleProject \
-          -Dsonar.host.url=http://localhost:9000 \
-          -Dsonar.login=${SONAR_TOKEN}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+
 
