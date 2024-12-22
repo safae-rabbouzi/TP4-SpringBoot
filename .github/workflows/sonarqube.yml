@@ -60,7 +60,7 @@ jobs:
       with:
         projectBaseDir: .
         args: >
-          -Dsonar.projectKey=simpleProject
+          -Dsonar.projectKey=safae-rabbouzi_simpleproject
           -Dsonar.organization=safae-rabbouzi
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
