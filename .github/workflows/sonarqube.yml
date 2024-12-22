@@ -38,6 +38,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      sonarqube:
+        image: sonarqube:lts
+        ports:
+          - 9000:9000
+        options: >-
+          --health-cmd="curl -s http://localhost:9000/api/system/health | grep -q 'GREEN'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=50
     steps:
     # Étape 1 : Récupérer le code source
     - name: Checkout code
@@ -50,20 +60,25 @@ jobs:
         distribution: 'adopt'
         java-version: '19'
 
-    # Étape 3 : Construire le projet avec Maven
+    # Étape 3 : Attendre que SonarQube soit prêt
+    - name: Wait for SonarQube to be ready
+      run: |
+        echo "Waiting for SonarQube to be ready..."
+        until curl -s http://localhost:9000/api/system/health | grep -q 'GREEN'; do
+          sleep 10
+        done
+
+    # Étape 4 : Construire le projet avec Maven
     - name: Build with Maven
       run: mvn clean install -DskipTests
 
-    # Étape 4 : Exécuter l'analyse SonarQube
+    # Étape 5 : Exécuter l'analyse SonarQube
     - name: SonarQube Scan
-      uses: sonarsource/sonarqube-scan-action@master
-      with:
-        projectBaseDir: .
-        args: >
-          -Dsonar.projectKey=simpleProject
-          -Dsonar.host.url=http://localhost:9000
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: mvn sonar:sonar \
+          -Dsonar.projectKey=simpleProject \
+          -Dsonar.host.url=http://localhost:9000 \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
 
 
 
