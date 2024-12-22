@@ -55,7 +55,7 @@ jobs:
     - name: Run SonarCloud analysis
       run: |
         mvn org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar \
-        -Dsonar.projectKey=safae-rabbouzi_simpleProject \
+        -Dsonar.projectKey=safae-rabbouzi_TP4-SpringBoot \
         -Dsonar.organization=safae-rabbouzi \
         -Dsonar.host.url=https://sonarcloud.io \
         -Dsonar.login=${{ secrets.SONAR_TOKEN }}
