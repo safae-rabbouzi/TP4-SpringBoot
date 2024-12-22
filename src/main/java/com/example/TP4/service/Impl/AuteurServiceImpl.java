@@ -16,27 +16,32 @@ public class AuteurServiceImpl implements AuteurService {
 
     @Override
     public List<Auteur> getAllAuteurs() {
+
         return auteurRepository.findAll();
     }
 
     @Override
     public Optional<Auteur> getAuteurById(Long id) {
+
         return auteurRepository.findById(id);
     }
 
     @Override
     public Auteur createAuteur(Auteur auteur) {
+
         return auteurRepository.save(auteur);
     }
 
     @Override
     public Auteur updateAuteur(Long id, Auteur auteur) {
+
         auteur.setId(id);
         return auteurRepository.save(auteur);
     }
 
     @Override
     public void deleteAuteur(Long id) {
+
         auteurRepository.deleteById(id);
     }
 }

@@ -16,27 +16,32 @@ public class LivreServiceImpl implements LivreService {
 
     @Override
     public List<Livre> getAllLivres() {
+
         return livreRepository.findAll();
     }
 
     @Override
     public Optional<Livre> getLivreById(Long id) {
+
         return livreRepository.findById(id);
     }
 
     @Override
     public Livre createLivre(Livre livre) {
+
         return livreRepository.save(livre);
     }
 
     @Override
     public Livre updateLivre(Long id, Livre livre) {
+
         livre.setId(id);
         return livreRepository.save(livre);
     }
 
     @Override
     public void deleteLivre(Long id) {
+
         livreRepository.deleteById(id);
     }
 }

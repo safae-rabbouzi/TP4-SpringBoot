@@ -11,5 +11,4 @@ public interface LivreService {
     Livre createLivre(Livre livre);
     Livre updateLivre(Long id, Livre livre);
     void deleteLivre(Long id);
-
 }

@@ -18,26 +18,31 @@ public class LivreController {
 
     @GetMapping(Paths.List_ALL_LIVRES)
     public List<Livre> getAllLivres() {
+
         return livreService.getAllLivres();
     }
 
     @GetMapping(Paths.LIVRE_BY_ID)
     public Optional<Livre> getLivreById(@PathVariable Long id) {
+
         return livreService.getLivreById(id);
     }
 
     @PostMapping(Paths.ADD_LIVRE)
     public Livre createLivre(@RequestBody Livre livre) {
+
         return livreService.createLivre(livre);
     }
 
     @PutMapping(Paths.UPDATE_LIVRE)
     public Livre updateLivre(@PathVariable Long id, @RequestBody Livre livre) {
+
         return livreService.updateLivre(id, livre);
     }
 
     @DeleteMapping(Paths.DELETE_LIVRE)
     public void deleteLivre(@PathVariable Long id) {
+
         livreService.deleteLivre(id);
     }
 }

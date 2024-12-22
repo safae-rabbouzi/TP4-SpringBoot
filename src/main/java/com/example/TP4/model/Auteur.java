@@ -1,6 +1,5 @@
 package com.example.TP4.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +23,6 @@ public class Auteur {
     private String prenom;
 
     @OneToMany(mappedBy = "auteur", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-
     private List<Livre> livres;
 }
 
