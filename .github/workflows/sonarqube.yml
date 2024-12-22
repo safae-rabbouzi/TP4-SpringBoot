@@ -61,6 +61,7 @@ jobs:
         projectBaseDir: .
         args: >
           -Dsonar.projectKey=simpleProject
+          -Dsonar.host.url=http://localhost:9000
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
